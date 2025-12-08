@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "example" {
   region = var.location
 
   tags = {
-    Name        = "My bucket" 
+    Name        = "My bucket"
     Environment = "Dev"
   }
 }
