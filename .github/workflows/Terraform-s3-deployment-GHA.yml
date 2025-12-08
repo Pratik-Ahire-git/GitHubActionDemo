@@ -36,21 +36,21 @@ jobs:
 
       # Step 4: Initialize Terraform
       - name: Terraform Init
-        working-directory: terraform
+        working-directory: Terraform
         run: terraform init
 
       # Step 5: Terraform Format Check
       - name: Terraform Format
-        working-directory: terraform
+        working-directory: Terraform
         run: terraform fmt -check
 
       # Step 6: Terraform Plan
       - name: Terraform Plan
-        working-directory: terraform
+        working-directory: Terraform
         run: terraform plan -input=false
 
       # Step 7: Terraform Apply
       - name: Terraform Apply
-        working-directory: terraform
+        working-directory: Terraform
         run: terraform apply -auto-approve -input=false
         if: github.ref == 'refs/heads/main'
