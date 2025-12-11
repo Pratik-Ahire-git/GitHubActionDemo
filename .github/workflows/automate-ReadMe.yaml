@@ -1,21 +1,30 @@
-name: Generate terraform docs
+name: Generate Terraform Docs
+#on:
+#  push:
+#    branches: [ "master" ]
 
 on:
-  push:
-    branches: [ "main" ]
+  workflow_call:
+
+permissions:
+  repository-projects: write
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  id-token: write
 
 jobs:
-  docs:
-    runs-on: ubuntu-latest  # Run the Workflow on an Ubuntu Runner
+  reusable-docs-wf:
+    runs-on: ubuntu-latest  # Run the workflow on an Ubuntu runner
 
     steps:
-    - uses: actions/checkout@v3 # Checkout the repository code
+      - uses: actions/checkout@v3  # Checkout the repository code
 
-    - name: Install Terraform Docs
-      uses: terraform-docs/gh-actions@main # Action to install terraform-docs
-
-      with:
-        working-dir: Terraform  # Specify the directory containing Terraform code
-        output-file: README.md  # Update the README.md file with generated docs
-        output-method: inject   # Inject the documentation into README.md
-        git-push: "true"
+      - name: Install Terraform Docs
+        uses: terraform-docs/gh-actions@main  # Action to generate Terraform documentation
+        with:
+          working_dir: Terraform  # Use the current directory (adjust if needed)
+          output-file: README.md  # Update the README file with generated docs
+          output-method: inject  # Inject the documentation into the README
+          git-push: "true"
